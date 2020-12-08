@@ -69,6 +69,19 @@ class DonorCreateView(CreateView):
         messages.success(self.request,'Thankyou,for saving a life today!')
         return redirect('home')
 
+@method_decorator([login_required, adminstrator_required], name='dispatch')
+class BloodDriveCreateView(CreateView):
+    model = BloodDrive
+    fields = ('drive_title','drive_location','drive_date','capacity_collected')
+    template_name = hospitals/drive.html
+
+    def form_valid(self,form):
+        blooddrive = form.save(commit=False)
+        blooddrive.drive_owner = self.request.user
+        blooddrive.save()
+        messages.success(self.request,'You successfully created a Blood Drive!')
+        return redirect('home')
+
 
 
 

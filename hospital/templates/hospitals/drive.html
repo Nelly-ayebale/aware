@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Blood Drive</h2>
+            <form method="post" novalidate>
+                {% csrf_token %}
+
+                {% bootstrap_form form %}
+                <button type="submit" class="btn btn-danger">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
