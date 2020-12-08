@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView
-from .models import User
-from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm
+from .models import User,Hospital,Donor,BloodDrive
+from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm,HospitalForm,BloodDriveForm,DonorForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib import messages
 
 @login_required(login_url='login')
 def home(request):
@@ -40,6 +42,32 @@ class HospitalAdminstratorSignUpView(CreateView):
         login(self.request, user)
         return redirect('home')
 
+
+@method_decorator([login_required, adminstrator_required], name='dispatch')
+class HospitalCreateView(CreateView):
+    model = Hospital
+    fields = ('hospital_name','weight','capacity_required','capacity_available')
+    template_name = hospitals/hospital.html
+
+    def form_valid(self,form):
+        hospital = form.save(commit=False)
+        hospital.adminstrator = self.request.user
+        hospital.save()
+        messages.success(self.request,'Hospital created with success!')
+        return redirect('home')
+
+@method_decorator([login_required, regular_required], name='dispatch')
+class DonorCreateView(CreateView):
+    model = Donor
+    fields = ('donor_name','donor_age','blood_type','blood_status','quantity_donated')
+    template_name = hospitals/donor.html
+
+    def form_valid(self,form):
+        donor = form.save(commit=False)
+        donor.donor = self.request.user
+        donor.save()
+        messages.success(self.request,'Thankyou,for saving a life today!')
+        return redirect('home')
 
 
 
