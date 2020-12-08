@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="card m-5 p-5">
+            <div class="card-body">
+                <h5 class="card-title">Sign up for a free account</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Select below the type of account you want to create</h6>
+
+                <button class="btn btn-outline-success btn-lg" role="button"><a
+                        href="{% url 'adminstrator_signup' %}">I'm an
+                        Adminstrator</a></button>
+                <button class="btn btn-outline-success btn-lg" role="button"><a
+                        href="{% url 'regularuser_signup' %}">I'm a Regular
+                        User</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
