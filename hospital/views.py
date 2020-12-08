@@ -3,12 +3,18 @@ from django.views.generic import TemplateView, CreateView
 from .models import User
 from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def home(request):
     return render(request,'hospitals/home.html')
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
+
+class LoginView(TemplateView):
+    template_name = 'registration/login.html'
+
 
 class RegularUserSignUpView(CreateView):
     model = User
