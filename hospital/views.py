@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView,ListView
 from .models import User,Hospital,Donor,BloodDrive
 from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm,HospitalForm,BloodDriveForm,DonorForm
 from django.contrib.auth import login
@@ -79,5 +79,9 @@ class BloodDriveCreateView(CreateView):
         return redirect('home')
 
 
-
+class ViewHospitals(ListView):
+    model = Hospital
+    context_object_name = 'hospitals_list'
+    queryset = Hospital.objects.all()
+    template_name = 'hospitals/home.html'
 
