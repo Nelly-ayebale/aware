@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Adminstrator</th>
+                        <th scope="col">Hospital Name</th>
+                        <th scope="col">Blood Capacity Required</th>
+                        <th scope="col">Blood Capacity Available</th>
+
+                    </tr>
+                </thead>
+                {% for obj in object_list %}
+
+                <tbody>
+                    <tr>
+                        <td> {{obj.adminstrator}}</td>
+                        <td> {{ obj.hospital_name }}</td>
+                        <td> {{ obj.capacity_required }}</td>
+                        <td> {{ obj.capacity_available }}</td>
+                    </tr>
+
+                </tbody>
+                {% endfor %}
+            </table>
+
+            <br /><br />
+
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

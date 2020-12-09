@@ -39,6 +39,8 @@ class HospitalAdminstratorSignUpView(CreateView):
 def home(request):
     return render(request,'hospitals/home.html')
 
+
+
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class HospitalCreateView(CreateView):
     model = Hospital
@@ -79,9 +81,6 @@ class BloodDriveCreateView(CreateView):
         return redirect('home')
 
 
-class ViewHospitals(ListView):
-    model = Hospital
-    context_object_name = 'hospitals_list'
+class ViewHospitalsList(ListView):
     queryset = Hospital.objects.all()
-    template_name = 'hospitals/home.html'
-
+    template_name = 'hospitals/hospital_list.html'
