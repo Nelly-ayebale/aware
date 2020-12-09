@@ -80,7 +80,12 @@ class BloodDriveCreateView(CreateView):
         messages.success(self.request,'You successfully created a Blood Drive!')
         return redirect('home')
 
-
+@method_decorator([login_required, adminstrator_required], name='dispatch')
 class ViewHospitalsList(ListView):
     queryset = Hospital.objects.all()
     template_name = 'hospitals/hospital_list.html'
+
+@method_decorator([login_required, adminstrator_required], name='dispatch')
+class ViewDonorsList(ListView):
+    queryset = Donor.objects.all()
+    template_name = 'hospitals/donor_list.html'
