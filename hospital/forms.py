@@ -27,12 +27,12 @@ class RegularUserSignUpForm(UserCreationForm):
 class BloodDriveForm(forms.ModelForm):
     class Meta:
         model = BloodDrive
-        fields = ['drive_title','drive_location','drive_date','capacity_collected']
+        fields = ['drive_title','drive_location','capacity_collected']
 
 class HospitalForm(forms.ModelForm):
     class Meta:
         model = Hospital
-        fields = ['hospital_name','weight','capacity_required','capacity_available']
+        fields = ['hospital_name','capacity_required','capacity_available']
 
 class DonorForm(forms.ModelForm):
     class Meta:

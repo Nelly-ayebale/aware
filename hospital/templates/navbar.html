@@ -15,7 +15,54 @@
 
             </li>
 
+            {% if user.is_admin %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="font-weight: bolder;">
+                    Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
+
+                    <a class="dropdown-item" href="{%url 'home' %}">Home</a>
+
+
+
+                    <a class="dropdown-item" href="#">{{user.username}}</a>
+
+                    <a class="dropdown-item" href="{%url 'hospital' %}">Create Hospital</a>
+
+                    <a class="dropdown-item" href="{%url 'logout'%}">Logout</a>
+
+                </div>
+
+            </li>
+
+            {% endif %}
+
+            {% if user.is_user %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" style="font-weight: bolder;">
+                    Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+
+                    <a class="dropdown-item" href="{%url 'home' %}">Home</a>
+
+
+
+                    <a class="dropdown-item" href="#">{{user.username}}</a>
+
+                    <a class="dropdown-item" href="{%url 'donor' %}">Post Donor Details</a>
+
+                    <a class="dropdown-item" href="{%url 'logout'%}">Logout</a>
+
+                </div>
+
+            </li>
+            {% endif %}
         </ul>
 
         <form class="navbar-form">
@@ -29,4 +76,5 @@
 
         </form>
     </div>
+
 </nav>

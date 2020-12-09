@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import TemplateView, CreateView
 from .models import User,Hospital,Donor,BloodDrive
 from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm,HospitalForm,BloodDriveForm,DonorForm
@@ -6,17 +6,10 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
-
-@login_required(login_url='login')
-def home(request):
-    return render(request,'hospitals/home.html')
+from .decorators import adminstrator_required,regular_required
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
-
-class LoginView(TemplateView):
-    template_name = 'registration/login.html'
-
 
 class RegularUserSignUpView(CreateView):
     model = User
@@ -42,12 +35,15 @@ class HospitalAdminstratorSignUpView(CreateView):
         login(self.request, user)
         return redirect('home')
 
+@login_required(login_url='login')
+def home(request):
+    return render(request,'hospitals/home.html')
 
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class HospitalCreateView(CreateView):
     model = Hospital
-    fields = ('hospital_name','weight','capacity_required','capacity_available')
-    template_name = hospitals/hospital.html
+    fields = ('hospital_name','capacity_required','capacity_available')
+    template_name = 'hospitals/hospital.html'
 
     def form_valid(self,form):
         hospital = form.save(commit=False)
@@ -60,7 +56,7 @@ class HospitalCreateView(CreateView):
 class DonorCreateView(CreateView):
     model = Donor
     fields = ('donor_name','donor_age','blood_type','blood_status','quantity_donated')
-    template_name = hospitals/donor.html
+    template_name = 'hospitals/donor.html'
 
     def form_valid(self,form):
         donor = form.save(commit=False)
@@ -72,8 +68,8 @@ class DonorCreateView(CreateView):
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class BloodDriveCreateView(CreateView):
     model = BloodDrive
-    fields = ('drive_title','drive_location','drive_date','capacity_collected')
-    template_name = hospitals/drive.html
+    fields = ('drive_title','drive_location','capacity_collected')
+    template_name = 'hospitals/drive.html'
 
     def form_valid(self,form):
         blooddrive = form.save(commit=False)

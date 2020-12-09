@@ -1,16 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'registration/base.html' %}
 {% load bootstrap4 %}
 {% block content %}
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 m-5">
             <h2>Login</h2>
-            <form method="post" novalidate>
+            <form method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ next }}">
                 {% bootstrap_form form %}
-                <button type="submit" class="btn btn-danger">Login</button>
+                <button type="submit" class="btn btn-danger" value="login">Login</button>
+
             </form>
         </div>
     </div>

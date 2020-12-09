@@ -24,4 +24,5 @@ urlpatterns = [
     path('accounts/signup/', views.SignUpView.as_view(), name='signup'),
     path('accounts/signup/adminstrator/', views.HospitalAdminstratorSignUpView.as_view(), name='adminstrator_signup'),
     path('accounts/signup/regularuser/', views.RegularUserSignUpView.as_view(), name='regularuser_signup'),
+    
 ]
