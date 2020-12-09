@@ -1,4 +1,4 @@
-# [Aware]
+# [Aware](https://nellys-aware.herokuapp.com/)
 # Aware
 <table>
 <tr>
@@ -8,7 +8,7 @@
 </tr>
 </table>
 
-## [Usage]
+## [Usage](https://nellys-aware.herokuapp.com/)
 
 ### Development
 Want to contribute? Great!
