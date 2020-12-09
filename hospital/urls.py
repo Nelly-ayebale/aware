@@ -5,10 +5,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns=[
-    path('',views.home,name='home'),
+   
     path('hospital/add/', views.HospitalCreateView.as_view(), name='hospital'),
     path('donor/',views.DonorCreateView.as_view(),name='donor'),
-    path('drive/',views.BloodDriveCreateView.as_view(),name='drive'),
+    path('',views.DriveCreateView.as_view(),name='home'),
     path('hospitals/',views.ViewHospitalsList.as_view(),name='view_hospitals'),
     path('all_donors/',views.ViewDonorsList.as_view(),name='view_donors'),
 ] 

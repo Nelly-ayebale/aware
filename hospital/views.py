@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView, CreateView,ListView
-from .models import User,Hospital,Donor,BloodDrive
+from .models import User,Hospital,Donor,Drive
 from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm,HospitalForm,BloodDriveForm,DonorForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -35,12 +35,6 @@ class HospitalAdminstratorSignUpView(CreateView):
         login(self.request, user)
         return redirect('home')
 
-@login_required(login_url='login')
-def home(request):
-    return render(request,'hospitals/home.html')
-
-
-
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class HospitalCreateView(CreateView):
     model = Hospital
@@ -57,7 +51,7 @@ class HospitalCreateView(CreateView):
 @method_decorator([login_required, regular_required], name='dispatch')
 class DonorCreateView(CreateView):
     model = Donor
-    fields = ('donor_name','donor_age','blood_type','blood_status','quantity_donated')
+    fields = ('donor_first_name','donor_last_name','donor_age','blood_type','blood_status','weight','quantity_donated')
     template_name = 'hospitals/donor.html'
 
     def form_valid(self,form):
@@ -68,8 +62,8 @@ class DonorCreateView(CreateView):
         return redirect('home')
 
 @method_decorator([login_required, adminstrator_required], name='dispatch')
-class BloodDriveCreateView(CreateView):
-    model = BloodDrive
+class DriveCreateView(CreateView):
+    model = Drive
     fields = ('drive_title','drive_location','capacity_collected')
     template_name = 'hospitals/drive.html'
 
@@ -89,3 +83,4 @@ class ViewHospitalsList(ListView):
 class ViewDonorsList(ListView):
     queryset = Donor.objects.all()
     template_name = 'hospitals/donor_list.html'
+

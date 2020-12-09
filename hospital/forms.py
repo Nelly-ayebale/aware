@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms.utils import ValidationError
-from .models import User,BloodDrive,Hospital,Donor
+from .models import User,Drive,Hospital,Donor
 
 class HospitalAdminstratorSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -26,7 +26,7 @@ class RegularUserSignUpForm(UserCreationForm):
 
 class BloodDriveForm(forms.ModelForm):
     class Meta:
-        model = BloodDrive
+        model = Drive
         fields = ['drive_title','drive_location','capacity_collected']
 
 class HospitalForm(forms.ModelForm):
@@ -37,5 +37,5 @@ class HospitalForm(forms.ModelForm):
 class DonorForm(forms.ModelForm):
     class Meta:
         model = Donor
-        fields = ['donor_name','donor_age','blood_type','blood_status','quantity_donated']
+        fields = ['donor_first_name','donor_last_name','donor_age','blood_type','blood_status','weight','quantity_donated']
 
