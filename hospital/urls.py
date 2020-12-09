@@ -9,7 +9,8 @@ urlpatterns=[
     path('hospital/add/', views.HospitalCreateView.as_view(), name='hospital'),
     path('donor/',views.DonorCreateView.as_view(),name='donor'),
     path('drive/',views.BloodDriveCreateView.as_view(),name='drive'),
-    path('hospitals/',views.ViewHospitalsList.as_view(),name='view_hospitals')
+    path('hospitals/',views.ViewHospitalsList.as_view(),name='view_hospitals'),
+    path('all_donors/',views.ViewDonorsList.as_view(),name='view_donors'),
 ] 
 
 if settings.DEBUG:

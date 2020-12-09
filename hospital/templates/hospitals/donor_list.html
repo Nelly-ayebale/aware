@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Donor Name</th>
+                        <th scope="col">Donor Age</th>
+                        <th scope="col">Blood Type</th>
+                        <th scope="col">Blood Status</th>
+                        <th scope="col">Quantity Donated(ltrs)</th>
+
+                    </tr>
+                </thead>
+                {% for obj in object_list %}
+
+                <tbody>
+                    <tr>
+                        <td> {{obj.donor_name}}</td>
+                        <td> {{ obj.donor_age }}</td>
+                        <td> {{ obj.blood_type }}</td>
+                        <td> {{ obj.blood_status }}</td>
+                        <td> {{ obj.quantity_donated }}</td>
+                    </tr>
+
+                </tbody>
+                {% endfor %}
+            </table>
+
+            <br /><br />
+
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
