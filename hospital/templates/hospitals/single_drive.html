@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <h3 class="text-center" style="font-weight: bold;">Drive Name: {{drive.drive_title}}</h3>
+    </div>
+
+    <div class="row">
+        <h4>Hosting:<strong>{{drive.owner}} Hospital</strong></h4>
+    </div>
+
+    <div class="row">
+
+        <h4>Location of Blood Drive:<strong>{{drive.drive_location}}</strong></h4>
+
+    </div>
+
+    <div class="row">
+
+        <h4>Quantity Collected:<strong>{{drive.donor.donated_to|length}} Litres</strong></h4>
+
+    </div>
+
+</div>
+
+{% endblock %}

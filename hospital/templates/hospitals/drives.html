@@ -9,7 +9,9 @@
             {% for drive in drives %}
             <div class="card mt-3" style="width: 20rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Title:{{drive.drive_title}}</h5>
+                    <h5 class="card-title">Title:<a href="{%url 'single_drive' drive.id %}">{{drive.drive_title}}</a>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Hosting:{{drive.owner}}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Location:{{drive.drive_location}}</h6>
                     <p class="card-text">{{drive.comment}}.</p>
                     <p class="card-text">Capacity Required: {{drive.capacity_collected}} litres.</p>

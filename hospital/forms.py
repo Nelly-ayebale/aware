@@ -27,7 +27,7 @@ class RegularUserSignUpForm(UserCreationForm):
 class BloodDriveForm(forms.ModelForm):
     class Meta:
         model = Drive
-        fields = ['drive_title','drive_location','capacity_collected']
+        fields = ['drive_title','drive_location','capacity_collected','owner']
 
 class HospitalForm(forms.ModelForm):
     class Meta:
@@ -37,7 +37,7 @@ class HospitalForm(forms.ModelForm):
 class DonorForm(forms.ModelForm):
     class Meta:
         model = Donor
-        fields = ['donor_first_name','donor_last_name','donor_age','blood_type','blood_status','weight','quantity_donated']
+        fields = ['donor_first_name','donor_last_name','donor_age','blood_type','blood_status','weight','quantity_donated','donated_to']
 
 class SubscriptionForm(forms.Form):
     your_name = forms.CharField(label='First Name',max_length=30)

@@ -52,10 +52,11 @@ class HospitalCreateView(CreateView):
 
 @method_decorator([login_required, regular_required], name='dispatch')
 class DonorCreateView(CreateView):
+    
     model = Donor
-    fields = ('donor_first_name','donor_last_name','donor_age','blood_type','blood_status','weight','quantity_donated')
+    fields = ('donor_first_name','donor_last_name','donor_age','blood_type','blood_status','weight','quantity_donated','donated_to')
     template_name = 'hospitals/donor.html'
-
+    
     def form_valid(self,form):
         donor = form.save(commit=False)
         donor.donor = self.request.user
@@ -66,13 +67,13 @@ class DonorCreateView(CreateView):
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class DriveCreateView(CreateView):
     model = Drive
-    fields = ('drive_title','drive_location','photo','comment','capacity_collected')
+    fields = ('drive_title','drive_location','photo','comment','capacity_collected','owner')
     template_name = 'hospitals/drive.html'
 
     def form_valid(self,form):
-        blooddrive = form.save(commit=False)
-        blooddrive.drive_owner = self.request.user
-        blooddrive.save()
+        drive = form.save(commit=False)
+        drive.drive_owner = self.request.user
+        drive.save()
         messages.success(self.request,'You successfully created a Blood Drive!')
         return redirect('drive')
 
@@ -109,6 +110,7 @@ def search_results(request):
 
 @login_required(login_url='login')
 def single_hospital(request,hospital_id):
+    
     form = SubscriptionForm()
     try:
         hospital = Hospital.objects.get(id = hospital_id)
@@ -126,3 +128,13 @@ def subscription(request):
     send_welcome_email(name, email)
     data = {'success': 'You have been successfully added to our mailing list'}
     return JsonResponse(data)
+
+@login_required(login_url='login')
+def single_drive(request,drive_id):
+    
+    
+    try:
+        drive = Drive.objects.get(id = drive_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"hospitals/single_drive.html", {"drive":drive})

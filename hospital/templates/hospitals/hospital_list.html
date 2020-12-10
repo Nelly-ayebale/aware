@@ -17,6 +17,7 @@
                         <th scope="col">Blood Capacity Required</th>
                         <th scope="col">Blood Capacity Available</th>
 
+
                     </tr>
                 </thead>
                 {% for hospital in hospitals %}
@@ -27,6 +28,7 @@
                         <td><a href="{%url 'single_hospital' hospital.id%}"> {{hospital.hospital_name }}</a></td>
                         <td> {{ hospital.capacity_required }}</td>
                         <td> {{ hospital.capacity_available }}</td>
+
                     </tr>
 
                 </tbody>

@@ -15,8 +15,9 @@ class Hospital(models.Model):
     capacity_required = models.IntegerField(default=0)
     capacity_available = models.IntegerField(default=0)
     
+    
     def __str__(self):
-        return self.user.username
+        return self.hospital_name
     
     @classmethod
     def search_by_name(cls,search_term):
@@ -33,17 +34,19 @@ class Donor(models.Model):
     blood_status = models.TextField(max_length=60)
     quantity_donated = models.IntegerField(default=0)
     weight = models.IntegerField(default=0)
-    donated_to = models.OneToOneField('Hospital',on_delete=models.CASCADE,null=True,blank=True)
+    donated_to = models.ForeignKey('Drive',blank=True,related_name='drive',on_delete=models.CASCADE,null=True)
 
     def __str__(self):
-        return self.user.username
+        return self.donor.username
 
 class Drive(models.Model):
+    owner = models.ForeignKey('Hospital',blank=True,on_delete=models.CASCADE,null=True)
     drive_title = models.CharField(max_length=150)
     drive_location = models.TextField(max_length=255)
     comment = models.TextField(blank=True)
     capacity_collected = models.IntegerField(default=0)
     photo = CloudinaryField('image',blank=True,null=True)
+    
     
     
     def __str__(self):
