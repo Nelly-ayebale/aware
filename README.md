@@ -47,6 +47,8 @@ This website was helpful in extending the Django User Model [here](https://simpl
 - Username : Ayebale
 - Password : 1234
 
+## Figma
+[here](https://www.figma.com/file/xLAWJbUsNOZRMdlh9nvtXs/Aware?node-id=0%3A1)
 
 [MIT](LICENSE) ©
 

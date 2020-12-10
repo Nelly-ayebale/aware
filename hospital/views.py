@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView, CreateView,ListView
+from django.http import HttpResponse, Http404,HttpResponseRedirect
 from .models import User,Hospital,Donor,Drive
-from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm,HospitalForm,BloodDriveForm,DonorForm
+from .forms import RegularUserSignUpForm, HospitalAdminstratorSignUpForm,HospitalForm,BloodDriveForm,DonorForm,SubscriptionForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -9,6 +10,7 @@ from django.contrib import messages
 from .decorators import adminstrator_required,regular_required
 from .forms import SubscriptionForm
 from django.http import JsonResponse
+from .email import send_welcome_email
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
@@ -119,7 +121,7 @@ def single_hospital(request,hospital_id):
     return render(request,"hospitals/single_hospital.html", {"hospital":hospital,"letterForm":form})
 
 
-def subscription(request):
+def subscriptionletter(request):
     name = request.POST.get('your_name')
     email = request.POST.get('email')
 
@@ -127,6 +129,7 @@ def subscription(request):
     recipient.save()
     send_welcome_email(name, email)
     data = {'success': 'You have been successfully added to our mailing list'}
+    print('I am working',data)
     return JsonResponse(data)
 
 @login_required(login_url='login')

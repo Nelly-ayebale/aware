@@ -4,7 +4,7 @@ $(document).ready(function () {
         form = $("form")
 
         $.ajax({
-            'url': '/ajax/subscriptionletter/',
+            'url': '/ajax/subscriptionletterletter/',
             'type': 'POST',
             'data': form.serialize(),
             'dataType': 'json',
@@ -15,4 +15,5 @@ $(document).ready(function () {
         $('#id_your_name').val('')
         $("#id_email").val('')
     })
+
 })

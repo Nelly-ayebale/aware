@@ -13,7 +13,7 @@ urlpatterns=[
     path('all_donors/',views.ViewDonorsList.as_view(),name='view_donors'),
     path('search/', views.search_results, name='search_results'),
     path('hospital/<int:hospital_id>',views.single_hospital,name ='single_hospital'),
-    path('ajax/subscriptionletter/', views.subscription, name='subscriptionletter'),
+    path('ajax/subscriptionletter/', views.subscriptionletter, name='subscriptionletter'),
     path('drive/<int:drive_id>',views.single_drive,name ='single_drive'),
     
 ] 
