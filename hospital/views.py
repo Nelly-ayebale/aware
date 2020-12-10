@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from .decorators import adminstrator_required,regular_required
+from .forms import SubscriptionForm
+from django.http import JsonResponse
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
@@ -74,10 +76,12 @@ class DriveCreateView(CreateView):
         messages.success(self.request,'You successfully created a Blood Drive!')
         return redirect('drive')
 
-@method_decorator([login_required, adminstrator_required], name='dispatch')
-class ViewHospitalsList(ListView):
-    queryset = Hospital.objects.all()
-    template_name = 'hospitals/hospital_list.html'
+@login_required(login_url='login')
+def all_hospitals(request):
+    hospitals = Hospital.objects.all()
+    
+    return render(request,'hospitals/hospital_list.html',{"hospitals":hospitals})
+
 
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class ViewDonorsList(ListView):
@@ -89,3 +93,36 @@ def drives(request):
     drives = Drive.objects.all()
     
     return render(request,'hospitals/drives.html',{"drives":drives})
+
+def search_results(request):
+
+    if 'hospital' in request.GET and request.GET["hospital"]:
+        search_term = request.GET.get("hospital")
+        searched_hospitals = Hospital.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'hospitals/search.html',{"message":message,"hospitals": searched_hospitals})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'hospitals/search.html',{"message":message})
+
+@login_required(login_url='login')
+def single_hospital(request,hospital_id):
+    form = SubscriptionForm()
+    try:
+        hospital = Hospital.objects.get(id = hospital_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"hospitals/single_hospital.html", {"hospital":hospital,"letterForm":form})
+
+
+def subscription(request):
+    name = request.POST.get('your_name')
+    email = request.POST.get('email')
+
+    recipient = SubscriptionRecipients(name=name, email=email)
+    recipient.save()
+    send_welcome_email(name, email)
+    data = {'success': 'You have been successfully added to our mailing list'}
+    return JsonResponse(data)

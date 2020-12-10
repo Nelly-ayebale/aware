@@ -17,6 +17,11 @@ class Hospital(models.Model):
     
     def __str__(self):
         return self.user.username
+    
+    @classmethod
+    def search_by_name(cls,search_term):
+        hospitals = cls.objects.filter(hospital_name__icontains=search_term)
+        return hospitals
 
 class Donor(models.Model):
     donor = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -43,3 +48,7 @@ class Drive(models.Model):
     
     def __str__(self):
         return self.drive_title
+
+class SubscriptionRecipients(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()

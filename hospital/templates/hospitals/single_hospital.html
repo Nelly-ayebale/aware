@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+        <h1 class="text-center">Name:{{hospital.hospital_name}} Hospital</h1>
+    </div>
+
+    <div class="row">
+        <p>Capacity Required:{{hospital.capacity_required}} Litres</p>
+    </div>
+
+    <div class="row">
+
+        <p>Capacity Available:{{hospital.capacity_available}} Litres</p>
+
+    </div>
+
+    <div class="row">
+
+        <form action="{%url 'single_hospital' hospital.id %}" method="post">
+            {%csrf_token%}
+
+            {% bootstrap_form letterForm layout='inline' %}
+            <input type="submit" value="Subscribe">
+        </form>
+
+    </div>
+</div>
+
+
+
+
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript" src="{% static 'js/subscriptionletter.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

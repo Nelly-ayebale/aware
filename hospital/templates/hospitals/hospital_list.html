@@ -19,14 +19,14 @@
 
                     </tr>
                 </thead>
-                {% for obj in object_list %}
+                {% for hospital in hospitals %}
 
                 <tbody>
                     <tr>
-                        <td> {{obj.adminstrator}}</td>
-                        <td> {{ obj.hospital_name }}</td>
-                        <td> {{ obj.capacity_required }}</td>
-                        <td> {{ obj.capacity_available }}</td>
+                        <td> {{hospital.adminstrator}}</td>
+                        <td><a href="{%url 'single_hospital' hospital.id%}"> {{hospital.hospital_name }}</a></td>
+                        <td> {{ hospital.capacity_required }}</td>
+                        <td> {{ hospital.capacity_available }}</td>
                     </tr>
 
                 </tbody>

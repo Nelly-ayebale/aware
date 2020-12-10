@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        {% if hospitals%}
+        <h2>Found {{ hospitals|length }} of searched term {{message}}</h2>
+        {% else %}
+        <h2> Found 0 hospitals for the search term {{message}}</h2>
+        {% endif %}
+
+    </div>
+
+    <div class="row">
+
+        {% if hospitals %}
+        {% for hospital in hospitals %}
+        <div class="col-sm-6 col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Name:{{hospital.hospital_name}}
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>Adminstrator:{{hospital.adminstrator}}.</p>
+
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

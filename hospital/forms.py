@@ -39,3 +39,6 @@ class DonorForm(forms.ModelForm):
         model = Donor
         fields = ['donor_first_name','donor_last_name','donor_age','blood_type','blood_status','weight','quantity_donated']
 
+class SubscriptionForm(forms.Form):
+    your_name = forms.CharField(label='First Name',max_length=30)
+    email = forms.EmailField(label='Email')

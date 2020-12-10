@@ -61,6 +61,8 @@
 
                     <a class="dropdown-item" href="{%url 'donor' %}">Post Donor Details</a>
 
+                    <a class="dropdown-item" href="{% url 'view_hospitals'%}">View Hospitals</a>
+
                     <a class="dropdown-item" href="{%url 'logout'%}">Logout</a>
 
                 </div>
@@ -69,12 +71,12 @@
             {% endif %}
         </ul>
 
-        <form class="navbar-form">
+        <form class="navbar-form" role="search" action="{% url 'search_results' %}">
 
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search For Hospital" name="title" class="mr-3">
+                <input type="text" class="form-control" placeholder="Search For Hospital" name="hospital">
                 <div class="input-group-btn">
-                    <button class="btn btn-outline-danger ml-2" type="submit">Search</button>
+                    <button class="btn btn-outline-primary ml-2" type="submit">Search</button>
                 </div>
             </div>
 
