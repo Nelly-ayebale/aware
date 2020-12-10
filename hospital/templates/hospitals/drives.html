@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load cloudinary %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% for drive in drives %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Title:{{drive.drive_title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Location:{{drive.drive_location}}</h6>
+                    <p class="card-text">{{drive.comment}}.</p>
+                    <p class="card-text">Capacity Required: {{drive.capacity_collected}} litres.</p>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -36,8 +36,9 @@ class Donor(models.Model):
 class Drive(models.Model):
     drive_title = models.CharField(max_length=150)
     drive_location = models.TextField(max_length=255)
-    drive_date = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(blank=True)
     capacity_collected = models.IntegerField(default=0)
+    photo = CloudinaryField('image',blank=True,null=True)
     
     
     def __str__(self):

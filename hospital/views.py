@@ -64,7 +64,7 @@ class DonorCreateView(CreateView):
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class DriveCreateView(CreateView):
     model = Drive
-    fields = ('drive_title','drive_location','capacity_collected')
+    fields = ('drive_title','drive_location','photo','comment','capacity_collected')
     template_name = 'hospitals/drive.html'
 
     def form_valid(self,form):
@@ -72,7 +72,7 @@ class DriveCreateView(CreateView):
         blooddrive.drive_owner = self.request.user
         blooddrive.save()
         messages.success(self.request,'You successfully created a Blood Drive!')
-        return redirect('home')
+        return redirect('drive')
 
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class ViewHospitalsList(ListView):
@@ -84,3 +84,8 @@ class ViewDonorsList(ListView):
     queryset = Donor.objects.all()
     template_name = 'hospitals/donor_list.html'
 
+@login_required(login_url='login')
+def drives(request):
+    drives = Drive.objects.all()
+    
+    return render(request,'hospitals/drives.html',{"drives":drives})
