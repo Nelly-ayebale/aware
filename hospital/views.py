@@ -21,7 +21,7 @@ class RegularUserSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('drive')
 
 class HospitalAdminstratorSignUpView(CreateView):
     model = User
@@ -33,7 +33,7 @@ class HospitalAdminstratorSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('drive')
 
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class HospitalCreateView(CreateView):
@@ -46,7 +46,7 @@ class HospitalCreateView(CreateView):
         hospital.adminstrator = self.request.user
         hospital.save()
         messages.success(self.request,'Hospital created with success!')
-        return redirect('home')
+        return redirect('drive')
 
 @method_decorator([login_required, regular_required], name='dispatch')
 class DonorCreateView(CreateView):
@@ -59,7 +59,7 @@ class DonorCreateView(CreateView):
         donor.donor = self.request.user
         donor.save()
         messages.success(self.request,'Thankyou,for saving a life today!')
-        return redirect('home')
+        return redirect('drive')
 
 @method_decorator([login_required, adminstrator_required], name='dispatch')
 class DriveCreateView(CreateView):

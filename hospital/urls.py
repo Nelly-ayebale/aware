@@ -8,7 +8,7 @@ urlpatterns=[
     path('',views.drives,name='drive'),
     path('hospital/add/', views.HospitalCreateView.as_view(), name='hospital'),
     path('donor/',views.DonorCreateView.as_view(),name='donor'),
-    path('create_drives/',views.DriveCreateView.as_view(),name='home'),
+    path('create_drives/',views.DriveCreateView.as_view(),name='create_drives'),
     path('hospitals/',views.ViewHospitalsList.as_view(),name='view_hospitals'),
     path('all_donors/',views.ViewDonorsList.as_view(),name='view_donors'),
 ] 
